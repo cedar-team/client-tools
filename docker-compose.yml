@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+
+  base: &base
+    image: cedartools-base
+    build:
+      context: ./docker/cedartools
+  
+  generatecsr:
+    << : *base
+    command: openssl req -new -newkey rsa:2048 -nodes -keyout out/server.key -out out/server.csr
+    volumes:
+      - ./:/out
